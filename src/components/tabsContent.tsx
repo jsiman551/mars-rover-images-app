@@ -1,20 +1,26 @@
 'use client'
-import { useState, useEffect, ReactNode } from 'react'
-import { Tabs, TabList, Tab, TabPanels, TabPanel, Heading, Grid, GridItem, Image } from "@chakra-ui/react";
+import { useState, useEffect, ReactNode, useRef, RefObject } from 'react'
+import { Tabs, TabList, Tab, TabPanels, TabPanel, Heading, Grid, GridItem, Image, Button, useDisclosure, Flex } from "@chakra-ui/react";
 import { getPhotos } from '@/api/apiCall';
 import { roversNames } from '@/contants';
 import Loading from './loading';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import PaginationButtons from './paginationButtons';
+import SidebarFilters from './sidebarFilters';
 
 export default function TabsContent() {
     const [ curiosity ] = roversNames
+    const openFiltersRef = useRef<any>()
+    /* sidebar filters  states */
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [ roverName, setRoverName ] = useState<string>(curiosity)
     /* loading state, data won't render until is fully fetched */
     const [ loadingState, setLoadingState ] = useState<boolean>(true)
     const [ photosData, setPhotosData ] = useState<Array<object>>([])
     /* pagination number */
     const [ pageNumber, setPageNumber ] = useState<number>(1)
+    /* pagination number */
+    const [ cameraName, setCameraName ] = useState<string>('')
 
     /* handle tabs change */
     const handleTabsChange = (index: number): void => {
@@ -32,7 +38,7 @@ export default function TabsContent() {
         const getPhotosData = async () => {
             /* set loading state to true for new calls */
             setLoadingState(true)
-            const apiResponde = await getPhotos(roverName, pageNumber)
+            const apiResponde = await getPhotos(roverName, pageNumber, cameraName)
             if (apiResponde) {
                 setPhotosData(apiResponde)
                 /* set loading state to false, so photos can be rendered */
@@ -42,7 +48,8 @@ export default function TabsContent() {
         getPhotosData()
     }, [ 
         roverName, 
-        pageNumber 
+        pageNumber,
+        cameraName
     ])
 
     console.log(photosData)
@@ -74,12 +81,30 @@ export default function TabsContent() {
                 {roversNames.map((roverName: string, i: number): ReactNode => {
                         return(
                             <TabPanel key={i}>
-                                <Heading py={6}>
-                                    {`Page: ${pageNumber}`}
-                                </Heading>
+                                <Flex 
+                                    alignItems={'center'} 
+                                    justifyContent={'space-between'}
+                                    px={{ md: 24}}
+                                    pt={6}
+                                    pb={12}
+                                >
+                                    <Button 
+                                        ref={openFiltersRef} 
+                                        colorScheme='blue' 
+                                        onClick={onOpen}
+                                        variant='outline'
+                                        size={{ base: 'md', xl: 'lg'}}
+                                    >
+                                        Apply Filters
+                                    </Button>
+                                    <Heading>
+                                        {`Page: ${pageNumber}`}
+                                    </Heading>
+                                </Flex>
                                 {loadingState ?
                                     <Loading /> 
-                                        : 
+                                        :
+                                        <> 
                                     <Grid 
                                         templateColumns={{ 
                                             base: 'repeat(2, 1fr)', 
@@ -105,17 +130,23 @@ export default function TabsContent() {
                                             )
                                         })}
                                     </Grid>
+                                    <PaginationButtons 
+                                        pageNumber={pageNumber} 
+                                        setPageNumber={setPageNumber}
+                                        dataLength={photosData.length}
+                                    />
+                                </>
                                 }
-                                <PaginationButtons 
-                                    pageNumber={pageNumber} 
-                                    setPageNumber={setPageNumber}
-                                    dataLength={photosData.length}
-                                />
                             </TabPanel>
                         )
                     })}
                 </TabPanels>
             </Tabs>
+            <SidebarFilters 
+                isOpen={isOpen} 
+                onClose={onClose} 
+                btnRef={openFiltersRef} 
+            />
         </>
     )
 }
