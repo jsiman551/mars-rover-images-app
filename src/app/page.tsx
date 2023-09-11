@@ -1,7 +1,7 @@
-'use client'
-import DarkModeSwitch from "@/components/darkModeSwitch";
-import TabsContent from "@/components/tabsContent";
-import { Box } from "@chakra-ui/react";
+'use client';
+import DarkModeSwitch from '@/components/darkModeSwitch';
+import TabsContent from '@/components/tabsContent';
+import { Box } from '@chakra-ui/react';
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
         <TabsContent />
       </Box>
     </main>
-  )
+  );
 }
