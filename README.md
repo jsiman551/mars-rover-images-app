@@ -10,7 +10,7 @@ Connects to the NASA API (NASA Open APIs)
 - [x] Allows the user to filter the rover photos by camera.
 - [x] By default it shows the latest photos for current day.
 - [x] Allows the user to search for photos based on 'Earth Day' date (2020-09-22).
-- [ ] Allows the user to search for photos based on the 'Sol' date (2890).
+- [x] Allows the user to search for photos based on the 'Sol' date (2890).
 
 ### Optional goals:
 

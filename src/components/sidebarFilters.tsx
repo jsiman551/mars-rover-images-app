@@ -11,7 +11,10 @@ import {
   Select,
   Box,
   Text,
-  Input
+  Input,
+  FormLabel,
+  Switch,
+  Divider,
 } from '@chakra-ui/react';
 import {
   curiosityCameras,
@@ -31,8 +34,14 @@ interface Props {
   cameraName: string;
   roverName: string;
   // eslint-disable-next-line no-unused-vars
-  setEarthDate: (arg0: string) => void
-  earthDate: string
+  setEarthDate: (arg0: string) => void;
+  earthDate: string;
+  // eslint-disable-next-line no-unused-vars
+  setSolDate: (arg0: number) => void;
+  // eslint-disable-next-line no-unused-vars
+  setIsQueryBySol: (arg0: boolean) => void;
+  isQueryBySol: boolean;
+  solDate: number;
 }
 
 export default function SidebarFilters({
@@ -43,33 +52,47 @@ export default function SidebarFilters({
   cameraName,
   roverName,
   setEarthDate,
-  earthDate
+  earthDate,
+  setSolDate,
+  setIsQueryBySol,
+  isQueryBySol,
+  solDate,
 }: Props) {
   const [curiosity, opportunity, spirit] = roversNames;
   const cameraSelectorRef = useRef<any>();
   const earthDateRef = useRef<any>();
+  const solDateRef = useRef<any>();
   const [camerasList, setCamerasList] = useState<Array<string>>([]);
   /* current earth date */
-  const currentEarthDate = moment(new Date()).format("yyyy-MM-DD")
+  const currentEarthDate = moment(new Date()).format('yyyy-MM-DD');
 
   /* apply filters function */
-  const applyFilters = () => {
+  const applyFilters = (): void => {
     /* filter by camera */
-    if (cameraSelectorRef.current.value) {
+    if (cameraSelectorRef.current?.value) {
       setCameraName(cameraSelectorRef.current.value);
     }
-    if(earthDateRef.current.value) {
-      setEarthDate(earthDateRef.current.value)
+    /* filter by earth date */
+    if (earthDateRef.current?.value) {
+      setEarthDate(earthDateRef.current.value);
+    }
+    /* filter by sol date */
+    if (solDateRef.current?.value) {
+      setSolDate(solDateRef.current.value);
     }
   };
 
   /* clear filters */
-  const clearFilters = () => {
+  const clearFilters = (): void => {
     /* camera name back to empty string */
-    setCameraName("")
-    /* set earth date tu current date */
-    setEarthDate(currentEarthDate)
-  }
+    setCameraName('');
+    /* set earth date back to current date */
+    setEarthDate(currentEarthDate);
+    /* set sol date back to 1000 */
+    setSolDate(1000);
+    /* set flag to switch dates back to earth date */
+    setIsQueryBySol(false);
+  };
 
   /* set the cameras list for selector */
   useEffect(() => {
@@ -97,13 +120,17 @@ export default function SidebarFilters({
 
         <DrawerBody>
           <Box>
-            <Text mb={1}>
-              Cameras List for {roverName}
-            </Text>
+            <FormLabel htmlFor="soldDateSwitch">Switch Dates?</FormLabel>
+            <Switch
+              id="soldDateSwitch"
+              onChange={() => setIsQueryBySol(!isQueryBySol)}
+            />
+          </Box>
+          <Divider my={4} />
+          <Box>
+            <Text mb={1}>Cameras List for {roverName}</Text>
             <Select defaultValue={cameraName} ref={cameraSelectorRef}>
-                <option value={""}>
-                  Select a camera
-                </option>
+              <option value={''}>Select a camera</option>
               {camerasList?.map((camera, cameraIndex) => (
                 <option key={cameraIndex} value={camera}>
                   {camera}
@@ -111,21 +138,32 @@ export default function SidebarFilters({
               ))}
             </Select>
           </Box>
-          <Box mt={3}>
-            <Text mb={1}>
-              {`Earth Date: ${earthDate}`}
-            </Text>
-            <Input
-              size="md"
-              type="date"
-              ref={earthDateRef}
-            />
-          </Box>
+          {!isQueryBySol ? (
+            <Box mt={3}>
+              <Text mb={1}>Earth Date:</Text>
+              <Input
+                size="md"
+                type="date"
+                ref={earthDateRef}
+                defaultValue={earthDate}
+              />
+            </Box>
+          ) : (
+            <Box mt={3}>
+              <Text mb={1}>Sol Date:</Text>
+              <Input
+                size="md"
+                type="number"
+                ref={solDateRef}
+                defaultValue={solDate}
+              />
+            </Box>
+          )}
         </DrawerBody>
 
         <DrawerFooter>
-        <Button
-            colorScheme="red"
+          <Button
+            colorScheme="yellow"
             onClick={() => {
               clearFilters();
               onClose();

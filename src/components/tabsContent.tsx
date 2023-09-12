@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, ReactNode, useRef } from 'react';
+import { useState, useEffect, ReactNode, useRef, Fragment } from 'react';
 import {
   Tabs,
   TabList,
@@ -8,8 +8,6 @@ import {
   TabPanel,
   Heading,
   Grid,
-  GridItem,
-  Image,
   Button,
   useDisclosure,
   Flex,
@@ -22,12 +20,14 @@ import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import PaginationButtons from './paginationButtons';
 import SidebarFilters from './sidebarFilters';
 import moment from 'moment';
+import { PhotoObjType } from '@/types';
+import PhotoElement from './photoElement';
 
 export default function TabsContent() {
   const [curiosity] = roversNames;
   const openFiltersRef = useRef<any>();
   /* current earth date */
-  const currentEarthDate = moment(new Date()).format("yyyy-MM-DD")
+  const currentEarthDate = moment(new Date()).format('yyyy-MM-DD');
   /* sidebar filters  states */
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [roverName, setRoverName] = useState<string>(curiosity);
@@ -44,7 +44,7 @@ export default function TabsContent() {
   const [solDate, setSolDate] = useState<number>(1000);
   /* flag to indicate which date is going to the call, either sol date or earth date */
   /* current earth date by default, to show latest photos for today */
-  const [isQueryBySol, isIsQueryBySol] = useState<boolean>(false);
+  const [isQueryBySol, setIsQueryBySol] = useState<boolean>(false);
 
   /* handle tabs change */
   const handleTabsChange = (index: number): void => {
@@ -57,6 +57,12 @@ export default function TabsContent() {
     });
     /* set cameraName back to empty string */
     setCameraName('');
+    /* set earth date back to current date */
+    setEarthDate(currentEarthDate);
+    /* set sol date back to 1000 */
+    setSolDate(1000);
+    /* set flag to switch dates back to earth date */
+    setIsQueryBySol(false);
   };
 
   /* call rover photos */
@@ -65,13 +71,13 @@ export default function TabsContent() {
       /* set loading state to true for new calls */
       setLoadingState(true);
       const apiResponde = await getPhotos(
-        roverName, 
-        pageNumber, 
-        cameraName, 
+        roverName,
+        pageNumber,
+        cameraName,
         earthDate,
         solDate,
-        isQueryBySol
-        );
+        isQueryBySol,
+      );
       if (apiResponde) {
         setPhotosData(apiResponde);
         /* set loading state to false, so photos can be rendered */
@@ -79,16 +85,14 @@ export default function TabsContent() {
       }
     };
     getPhotosData();
-  }, [roverName, pageNumber, cameraName, earthDate]);
-
-  console.log(photosData);
+  }, [roverName, pageNumber, cameraName, earthDate, solDate]);
 
   return (
     <>
       <Heading mb={4} textAlign={'center'}>
         Mars Rover Photos
       </Heading>
-      <Tabs isFitted variant="enclosed" onChange={handleTabsChange}>
+      <Tabs isFitted variant="soft-rounded" onChange={handleTabsChange}>
         <TabList mb="1em">
           {roversNames.map((name: string, i: number): ReactNode => {
             return <Tab key={i}>{capitalizeFirstLetter(name)}</Tab>;
@@ -112,7 +116,7 @@ export default function TabsContent() {
                     variant="outline"
                     size={{ base: 'md', xl: 'lg' }}
                   >
-                    Apply Filters
+                    Open Filters
                   </Button>
                   <Heading>{`Page: ${pageNumber}`}</Heading>
                 </Flex>
@@ -123,18 +127,24 @@ export default function TabsContent() {
                     {photosData.length > 0 ? (
                       <Grid
                         templateColumns={{
-                          base: 'repeat(2, 1fr)',
+                          base: 'repeat(1, 1fr)',
                           md: 'repeat(3, 1fr)',
                           xl: 'repeat(4, 1fr)',
                         }}
                         gap={{ base: 3, xl: 2 }}
                       >
                         {photosData.map(
-                          (item: any, itemIndex: number): ReactNode => {
+                          (
+                            photo: PhotoObjType,
+                            photoIndex: number,
+                          ): ReactNode => {
                             return (
-                              <GridItem w="100%" bg="gray.100" key={itemIndex}>
-                                <Image src={item.img_src} alt={roverName} />
-                              </GridItem>
+                              <Fragment key={photoIndex}>
+                                <PhotoElement
+                                  photoData={photo}
+                                  roverName={roverName}
+                                />
+                              </Fragment>
                             );
                           },
                         )}
@@ -167,6 +177,10 @@ export default function TabsContent() {
         roverName={roverName}
         setEarthDate={setEarthDate}
         earthDate={earthDate}
+        setSolDate={setSolDate}
+        setIsQueryBySol={setIsQueryBySol}
+        isQueryBySol={isQueryBySol}
+        solDate={solDate}
       />
     </>
   );
