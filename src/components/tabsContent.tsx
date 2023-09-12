@@ -13,6 +13,7 @@ import {
   Button,
   useDisclosure,
   Flex,
+  Text,
 } from '@chakra-ui/react';
 import { getPhotos } from '@/api/apiCall';
 import { roversNames } from '@/contants';
@@ -20,10 +21,13 @@ import Loading from './loading';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import PaginationButtons from './paginationButtons';
 import SidebarFilters from './sidebarFilters';
+import moment from 'moment';
 
 export default function TabsContent() {
   const [curiosity] = roversNames;
   const openFiltersRef = useRef<any>();
+  /* current earth date */
+  const currentEarthDate = moment(new Date()).format("yyyy-MM-DD")
   /* sidebar filters  states */
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [roverName, setRoverName] = useState<string>(curiosity);
@@ -32,8 +36,15 @@ export default function TabsContent() {
   const [photosData, setPhotosData] = useState<Array<object>>([]);
   /* pagination number */
   const [pageNumber, setPageNumber] = useState<number>(1);
-  /* pagination number */
+  /* camera name */
   const [cameraName, setCameraName] = useState<string>('');
+  /* earth date number */
+  const [earthDate, setEarthDate] = useState<string>(currentEarthDate);
+  /* sol date number */
+  const [solDate, setSolDate] = useState<number>(1000);
+  /* flag to indicate which date is going to the call, either sol date or earth date */
+  /* current earth date by default, to show latest photos for today */
+  const [isQueryBySol, isIsQueryBySol] = useState<boolean>(false);
 
   /* handle tabs change */
   const handleTabsChange = (index: number): void => {
@@ -44,6 +55,8 @@ export default function TabsContent() {
         setRoverName(name);
       }
     });
+    /* set cameraName back to empty string */
+    setCameraName('');
   };
 
   /* call rover photos */
@@ -51,7 +64,14 @@ export default function TabsContent() {
     const getPhotosData = async () => {
       /* set loading state to true for new calls */
       setLoadingState(true);
-      const apiResponde = await getPhotos(roverName, pageNumber, cameraName);
+      const apiResponde = await getPhotos(
+        roverName, 
+        pageNumber, 
+        cameraName, 
+        earthDate,
+        solDate,
+        isQueryBySol
+        );
       if (apiResponde) {
         setPhotosData(apiResponde);
         /* set loading state to false, so photos can be rendered */
@@ -59,9 +79,10 @@ export default function TabsContent() {
       }
     };
     getPhotosData();
-  }, [roverName, pageNumber, cameraName]);
+  }, [roverName, pageNumber, cameraName, earthDate]);
 
   console.log(photosData);
+
   return (
     <>
       <Heading mb={4} textAlign={'center'}>
@@ -99,24 +120,31 @@ export default function TabsContent() {
                   <Loading />
                 ) : (
                   <>
-                    <Grid
-                      templateColumns={{
-                        base: 'repeat(2, 1fr)',
-                        md: 'repeat(3, 1fr)',
-                        xl: 'repeat(4, 1fr)',
-                      }}
-                      gap={{ base: 3, xl: 2 }}
-                    >
-                      {photosData.map(
-                        (item: any, itemIndex: number): ReactNode => {
-                          return (
-                            <GridItem w="100%" bg="gray.100" key={itemIndex}>
-                              <Image src={item.img_src} alt={roverName} />
-                            </GridItem>
-                          );
-                        },
-                      )}
-                    </Grid>
+                    {photosData.length > 0 ? (
+                      <Grid
+                        templateColumns={{
+                          base: 'repeat(2, 1fr)',
+                          md: 'repeat(3, 1fr)',
+                          xl: 'repeat(4, 1fr)',
+                        }}
+                        gap={{ base: 3, xl: 2 }}
+                      >
+                        {photosData.map(
+                          (item: any, itemIndex: number): ReactNode => {
+                            return (
+                              <GridItem w="100%" bg="gray.100" key={itemIndex}>
+                                <Image src={item.img_src} alt={roverName} />
+                              </GridItem>
+                            );
+                          },
+                        )}
+                      </Grid>
+                    ) : (
+                      <Text fontSize={'lg'} textAlign={'center'}>
+                        There are no elements that match current filter
+                        conditions
+                      </Text>
+                    )}
                     <PaginationButtons
                       pageNumber={pageNumber}
                       setPageNumber={setPageNumber}
@@ -133,6 +161,12 @@ export default function TabsContent() {
         isOpen={isOpen}
         onClose={onClose}
         btnRef={openFiltersRef}
+        setCameraName={setCameraName}
+        cameraName={cameraName}
+        photosData={photosData}
+        roverName={roverName}
+        setEarthDate={setEarthDate}
+        earthDate={earthDate}
       />
     </>
   );

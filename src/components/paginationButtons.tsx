@@ -1,5 +1,5 @@
 'use string';
-import { Stack, Button, Text } from '@chakra-ui/react';
+import { Stack, Button } from '@chakra-ui/react';
 
 interface Props {
   pageNumber: number;
@@ -44,9 +44,6 @@ export default function PaginationButtons({
           Next Page
         </Button>
       ) : null}
-      <Text fontSize={'xl'} display={{ base: 'none', md: 'block' }}>
-        {`Page: ${pageNumber}`}
-      </Text>
     </Stack>
   );
 }

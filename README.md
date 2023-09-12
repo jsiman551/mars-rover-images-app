@@ -7,9 +7,9 @@ Connects to the NASA API (NASA Open APIs)
 - [x] Obtains photos from the 'Mars Rover' endpoint.
 - [x] Allows the user to see the photos of each rover (Curiosity, Opportunity and Spirit).
 - [x] The photos list should be paginated showing a max of 25 photos per page (dynamic loading similar to facebook/instagram will be nice, but not required).
-- [ ] Allows the user to filter the rover photos by camera.
-- [ ] By default it shows the latest photos for current day.
-- [ ] Allows the user to search for photos based on 'Earth Day' date (2020-09-22).
+- [x] Allows the user to filter the rover photos by camera.
+- [x] By default it shows the latest photos for current day.
+- [x] Allows the user to search for photos based on 'Earth Day' date (2020-09-22).
 - [ ] Allows the user to search for photos based on the 'Sol' date (2890).
 
 ### Optional goals:
