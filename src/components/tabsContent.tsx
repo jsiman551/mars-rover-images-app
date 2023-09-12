@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, ReactNode, useRef, Fragment } from 'react';
+import { ReactNode, useRef, Fragment, useContext } from 'react';
 import {
   Tabs,
   TabList,
@@ -13,38 +13,34 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
-import { getPhotos } from '@/api/apiCall';
 import { roversNames } from '@/contants';
 import Loading from './loading';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import PaginationButtons from './paginationButtons';
 import SidebarFilters from './sidebarFilters';
-import moment from 'moment';
-import { PhotoObjType } from '@/types';
+import { ContextObjType, PhotoObjType } from '@/types';
 import PhotoElement from './photoElement';
+import { ThemeContext } from '@/app/page';
 
 export default function TabsContent() {
-  const [curiosity] = roversNames;
+  /* get context */
+  const context = useContext<ContextObjType | any>(ThemeContext);
+  const {
+    photosData,
+    loadingState,
+    currentEarthDate,
+    pageNumber,
+    setPageNumber,
+    setCameraName,
+    setEarthDate,
+    setSolDate,
+    setRoverName,
+    setIsQueryBySol,
+  } = context;
+  /* filter action */
   const openFiltersRef = useRef<any>();
-  /* current earth date */
-  const currentEarthDate = moment(new Date()).format('yyyy-MM-DD');
   /* sidebar filters  states */
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [roverName, setRoverName] = useState<string>(curiosity);
-  /* loading state, data won't render until is fully fetched */
-  const [loadingState, setLoadingState] = useState<boolean>(true);
-  const [photosData, setPhotosData] = useState<Array<object>>([]);
-  /* pagination number */
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  /* camera name */
-  const [cameraName, setCameraName] = useState<string>('');
-  /* earth date number */
-  const [earthDate, setEarthDate] = useState<string>(currentEarthDate);
-  /* sol date number */
-  const [solDate, setSolDate] = useState<number>(1000);
-  /* flag to indicate which date is going to the call, either sol date or earth date */
-  /* current earth date by default, to show latest photos for today */
-  const [isQueryBySol, setIsQueryBySol] = useState<boolean>(false);
 
   /* handle tabs change */
   const handleTabsChange = (index: number): void => {
@@ -64,28 +60,6 @@ export default function TabsContent() {
     /* set flag to switch dates back to earth date */
     setIsQueryBySol(false);
   };
-
-  /* call rover photos */
-  useEffect(() => {
-    const getPhotosData = async () => {
-      /* set loading state to true for new calls */
-      setLoadingState(true);
-      const apiResponde = await getPhotos(
-        roverName,
-        pageNumber,
-        cameraName,
-        earthDate,
-        solDate,
-        isQueryBySol,
-      );
-      if (apiResponde) {
-        setPhotosData(apiResponde);
-        /* set loading state to false, so photos can be rendered */
-        setLoadingState(false);
-      }
-    };
-    getPhotosData();
-  }, [roverName, pageNumber, cameraName, earthDate, solDate]);
 
   return (
     <>
@@ -130,6 +104,7 @@ export default function TabsContent() {
                           base: 'repeat(1, 1fr)',
                           md: 'repeat(3, 1fr)',
                           xl: 'repeat(4, 1fr)',
+                          '2xl': 'repeat(5, 1fr)',
                         }}
                         gap={{ base: 3, xl: 2 }}
                       >
@@ -141,8 +116,8 @@ export default function TabsContent() {
                             return (
                               <Fragment key={photoIndex}>
                                 <PhotoElement
-                                  photoData={photo}
                                   roverName={roverName}
+                                  photoData={photo}
                                 />
                               </Fragment>
                             );
@@ -155,11 +130,7 @@ export default function TabsContent() {
                         conditions
                       </Text>
                     )}
-                    <PaginationButtons
-                      pageNumber={pageNumber}
-                      setPageNumber={setPageNumber}
-                      dataLength={photosData.length}
-                    />
+                    <PaginationButtons />
                   </>
                 )}
               </TabPanel>
@@ -171,16 +142,6 @@ export default function TabsContent() {
         isOpen={isOpen}
         onClose={onClose}
         btnRef={openFiltersRef}
-        setCameraName={setCameraName}
-        cameraName={cameraName}
-        photosData={photosData}
-        roverName={roverName}
-        setEarthDate={setEarthDate}
-        earthDate={earthDate}
-        setSolDate={setSolDate}
-        setIsQueryBySol={setIsQueryBySol}
-        isQueryBySol={isQueryBySol}
-        solDate={solDate}
       />
     </>
   );

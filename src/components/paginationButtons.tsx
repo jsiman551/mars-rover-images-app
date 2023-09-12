@@ -1,17 +1,13 @@
 'use string';
+import { useContext } from 'react';
+import { ThemeContext } from '@/app/page';
+import { ContextObjType } from '@/types';
 import { Stack, Button } from '@chakra-ui/react';
 
-interface Props {
-  pageNumber: number;
-  setPageNumber: Function;
-  dataLength: number;
-}
-
-export default function PaginationButtons({
-  pageNumber,
-  setPageNumber,
-  dataLength,
-}: Props) {
+export default function PaginationButtons() {
+  /* get context */
+  const context = useContext<ContextObjType | any>(ThemeContext);
+  const { photosData, pageNumber, setPageNumber } = context;
   return (
     <Stack
       justifyContent={'center'}
@@ -32,7 +28,7 @@ export default function PaginationButtons({
           Previous Page
         </Button>
       ) : null}
-      {dataLength === 25 ? (
+      {photosData.length === 25 ? (
         <Button
           colorScheme={'blue'}
           variant="outline"

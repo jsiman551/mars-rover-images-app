@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useContext, useEffect, useRef, useState } from 'react';
 import {
   Button,
   Drawer,
@@ -22,49 +22,35 @@ import {
   spiritCameras,
   roversNames,
 } from '@/contants';
-import moment from 'moment';
+import { ContextObjType } from '@/types';
+import { ThemeContext } from '@/app/page';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   btnRef: RefObject<HTMLInputElement>;
-  // eslint-disable-next-line no-unused-vars
-  setCameraName: (arg0: string) => void;
-  photosData: Array<object>;
-  cameraName: string;
-  roverName: string;
-  // eslint-disable-next-line no-unused-vars
-  setEarthDate: (arg0: string) => void;
-  earthDate: string;
-  // eslint-disable-next-line no-unused-vars
-  setSolDate: (arg0: number) => void;
-  // eslint-disable-next-line no-unused-vars
-  setIsQueryBySol: (arg0: boolean) => void;
-  isQueryBySol: boolean;
-  solDate: number;
 }
 
-export default function SidebarFilters({
-  isOpen,
-  onClose,
-  btnRef,
-  setCameraName,
-  cameraName,
-  roverName,
-  setEarthDate,
-  earthDate,
-  setSolDate,
-  setIsQueryBySol,
-  isQueryBySol,
-  solDate,
-}: Props) {
+export default function SidebarFilters({ isOpen, onClose, btnRef }: Props) {
+  /* get context */
+  const context = useContext<ContextObjType | any>(ThemeContext);
+  const {
+    currentEarthDate,
+    cameraName,
+    setCameraName,
+    earthDate,
+    solDate,
+    roverName,
+    isQueryBySol,
+    setEarthDate,
+    setSolDate,
+    setIsQueryBySol,
+  } = context;
   const [curiosity, opportunity, spirit] = roversNames;
   const cameraSelectorRef = useRef<any>();
   const earthDateRef = useRef<any>();
   const solDateRef = useRef<any>();
   const [camerasList, setCamerasList] = useState<Array<string>>([]);
-  /* current earth date */
-  const currentEarthDate = moment(new Date()).format('yyyy-MM-DD');
 
   /* apply filters function */
   const applyFilters = (): void => {

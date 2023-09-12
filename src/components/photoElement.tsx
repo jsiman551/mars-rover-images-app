@@ -19,8 +19,8 @@ interface Props {
 export default function PhotoElement({ photoData, roverName }: Props) {
   const { img_src, camera, earth_date, sol, id } = photoData;
   return (
-    <GridItem w="100%" bg="gray.100" borderRadius={'lg'}>
-      <Card maxW="sm">
+    <GridItem w="100%" bg="gray.100">
+      <Card>
         <CardBody>
           <Image src={img_src} alt={roverName} />
           <Stack mt="6" spacing="3">
