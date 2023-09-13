@@ -14,17 +14,17 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { roversNames } from '@/contants';
-import Loading from './loading';
+import Loading from '../loading';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import PaginationButtons from './paginationButtons';
-import SidebarFilters from './sidebarFilters';
+import PaginationButtons from '../paginationButtons';
+import SidebarFilters from '../sidebarFilters';
 import { ContextObjType, PhotoObjType } from '@/types';
-import PhotoElement from './photoElement';
+import PhotoElement from '../photoElement';
 import { ThemeContext } from '@/app/page';
 
 export default function TabsContent() {
   /* get context */
-  const context = useContext<ContextObjType | any>(ThemeContext);
+  const context = useContext<ContextObjType>(ThemeContext);
   const {
     photosData,
     loadingState,
@@ -38,7 +38,7 @@ export default function TabsContent() {
     setIsQueryBySol,
   } = context;
   /* filter action */
-  const openFiltersRef = useRef<any>();
+  const openFiltersRef = useRef<HTMLButtonElement>(null);
   /* sidebar filters  states */
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -66,7 +66,12 @@ export default function TabsContent() {
       <Heading mb={4} textAlign={'center'}>
         Mars Rover Photos
       </Heading>
-      <Tabs isFitted variant="soft-rounded" onChange={handleTabsChange}>
+      <Tabs
+        data-testid="tabs-container"
+        isFitted
+        variant="soft-rounded"
+        onChange={handleTabsChange}
+      >
         <TabList mb="1em">
           {roversNames.map((name: string, i: number): ReactNode => {
             return <Tab key={i}>{capitalizeFirstLetter(name)}</Tab>;

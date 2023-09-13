@@ -1,3 +1,4 @@
+import { contextDataMock } from '@/contants';
 import { PhotoObjType } from '@/types';
 import {
   GridItem,
@@ -16,11 +17,21 @@ interface Props {
   roverName: string;
 }
 
-export default function PhotoElement({ photoData, roverName }: Props) {
+const { photosData } = contextDataMock;
+
+export default function PhotoElement({
+  photoData = photosData[0],
+  roverName,
+}: Props) {
   const { img_src, camera, earth_date, sol, id } = photoData;
   return (
-    <GridItem w="100%" bg="gray.100">
-      <Card>
+    <GridItem
+      borderRadius={'lg'}
+      w="100%"
+      bg="gray.100"
+      data-testid="photo-element-container"
+    >
+      <Card variant={'filled'}>
         <CardBody>
           <Image src={img_src} alt={roverName} />
           <Stack mt="6" spacing="3">

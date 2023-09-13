@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders dark mode switcher unchanged 1`] = `
+<div>
+  <div
+    class="chakra-form-control css-1yqeby0"
+    data-testid="switcher-control"
+    role="group"
+  >
+    <label
+      class="chakra-form__label css-1w9kk21"
+      data-testid="switcher-label"
+      for="dark-mode-switch"
+      id="field-:r0:-label"
+    >
+      Enable dark mode?
+    </label>
+    <label
+      class="chakra-switch css-16pgy8f"
+      data-testid="switcher"
+    >
+      <input
+        aria-disabled="false"
+        aria-invalid="false"
+        class="chakra-switch__input"
+        id="dark-mode-switch"
+        style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; width: 1px; margin: -1px; padding: 0px; overflow: hidden; white-space: nowrap; position: absolute;"
+        type="checkbox"
+        value=""
+      />
+      <span
+        aria-hidden="true"
+        class="chakra-switch__track css-14qxnv8"
+      >
+        <span
+          class="chakra-switch__thumb css-0"
+        />
+      </span>
+    </label>
+  </div>
+</div>
+`;

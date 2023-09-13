@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <main
+    data-testid="main"
+  >
+    <div
+      class="css-2rlxtj"
+    >
+      <div
+        class="chakra-form-control css-1yqeby0"
+        data-testid="switcher-control"
+        role="group"
+      >
+        <label
+          class="chakra-form__label css-1w9kk21"
+          data-testid="switcher-label"
+          for="dark-mode-switch"
+          id="field-:r0:-label"
+        >
+          Enable dark mode?
+        </label>
+        <label
+          class="chakra-switch css-16pgy8f"
+          data-testid="switcher"
+        >
+          <input
+            aria-disabled="false"
+            aria-invalid="false"
+            class="chakra-switch__input"
+            id="dark-mode-switch"
+            style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; width: 1px; margin: -1px; padding: 0px; overflow: hidden; white-space: nowrap; position: absolute;"
+            type="checkbox"
+            value=""
+          />
+          <span
+            aria-hidden="true"
+            class="chakra-switch__track css-14qxnv8"
+          >
+            <span
+              class="chakra-switch__thumb css-0"
+            />
+          </span>
+        </label>
+      </div>
+      <h2
+        class="chakra-heading css-ft7kgn"
+      >
+        Mars Rover Photos
+      </h2>
+      <div
+        class="chakra-tabs css-0"
+        data-testid="tabs-container"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="chakra-tabs__tablist css-1ev1cfq"
+          role="tablist"
+        >
+          <button
+            aria-controls="tabs-:r2:--tabpanel-0"
+            aria-disabled="false"
+            aria-selected="true"
+            class="chakra-tabs__tab css-5wl5ud"
+            data-index="0"
+            id="tabs-:r2:--tab-0"
+            role="tab"
+            tabindex="0"
+            type="button"
+          >
+            Curiosity
+          </button>
+          <button
+            aria-controls="tabs-:r2:--tabpanel-1"
+            aria-disabled="false"
+            aria-selected="false"
+            class="chakra-tabs__tab css-5wl5ud"
+            data-index="1"
+            id="tabs-:r2:--tab-1"
+            role="tab"
+            tabindex="-1"
+            type="button"
+          >
+            Opportunity
+          </button>
+          <button
+            aria-controls="tabs-:r2:--tabpanel-2"
+            aria-disabled="false"
+            aria-selected="false"
+            class="chakra-tabs__tab css-5wl5ud"
+            data-index="2"
+            id="tabs-:r2:--tab-2"
+            role="tab"
+            tabindex="-1"
+            type="button"
+          >
+            Spirit
+          </button>
+        </div>
+        <div
+          class="chakra-tabs__tab-panels css-8atqhb"
+        >
+          <div
+            aria-labelledby="tabs-:r2:--tab-0"
+            class="chakra-tabs__tab-panel css-sjt5nk"
+            id="tabs-:r2:--tabpanel-0"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <div
+              class="css-zb3t9w"
+            >
+              <button
+                class="chakra-button css-4xx2wk"
+                type="button"
+              >
+                Open Filters
+              </button>
+              <h2
+                class="chakra-heading css-0"
+              >
+                Page: 1
+              </h2>
+            </div>
+            <div
+              class="css-xi606m"
+              data-testid="loading-container"
+            >
+              <div
+                class="chakra-spinner css-u4uvb9"
+                data-testid="loading-spinner"
+              >
+                <span
+                  class="css-8b45rq"
+                >
+                  Loading...
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-labelledby="tabs-:r2:--tab-1"
+            class="chakra-tabs__tab-panel css-sjt5nk"
+            hidden=""
+            id="tabs-:r2:--tabpanel-1"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <div
+              class="css-zb3t9w"
+            >
+              <button
+                class="chakra-button css-4xx2wk"
+                type="button"
+              >
+                Open Filters
+              </button>
+              <h2
+                class="chakra-heading css-0"
+              >
+                Page: 1
+              </h2>
+            </div>
+            <div
+              class="css-xi606m"
+              data-testid="loading-container"
+            >
+              <div
+                class="chakra-spinner css-u4uvb9"
+                data-testid="loading-spinner"
+              >
+                <span
+                  class="css-8b45rq"
+                >
+                  Loading...
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-labelledby="tabs-:r2:--tab-2"
+            class="chakra-tabs__tab-panel css-sjt5nk"
+            hidden=""
+            id="tabs-:r2:--tabpanel-2"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <div
+              class="css-zb3t9w"
+            >
+              <button
+                class="chakra-button css-4xx2wk"
+                type="button"
+              >
+                Open Filters
+              </button>
+              <h2
+                class="chakra-heading css-0"
+              >
+                Page: 1
+              </h2>
+            </div>
+            <div
+              class="css-xi606m"
+              data-testid="loading-container"
+            >
+              <div
+                class="chakra-spinner css-u4uvb9"
+                data-testid="loading-spinner"
+              >
+                <span
+                  class="css-8b45rq"
+                >
+                  Loading...
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-0"
+        data-testid="sidebar-container"
+      />
+    </div>
+  </main>
+</div>
+`;

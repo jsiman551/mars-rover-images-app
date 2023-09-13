@@ -6,7 +6,7 @@ import { Stack, Button } from '@chakra-ui/react';
 
 export default function PaginationButtons() {
   /* get context */
-  const context = useContext<ContextObjType | any>(ThemeContext);
+  const context = useContext<ContextObjType>(ThemeContext);
   const { photosData, pageNumber, setPageNumber } = context;
   return (
     <Stack
@@ -15,6 +15,7 @@ export default function PaginationButtons() {
       spacing={4}
       align="center"
       my={6}
+      data-testid="pagination-container"
     >
       {pageNumber > 1 ? (
         <Button

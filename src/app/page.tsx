@@ -5,11 +5,11 @@ import { getPhotos } from '@/api/apiCall';
 import DarkModeSwitch from '@/components/darkModeSwitch';
 import TabsContent from '@/components/tabsContent';
 import { Box } from '@chakra-ui/react';
-import { roversNames } from '@/contants';
+import { contextDataMock, roversNames } from '@/contants';
 import { ContextObjType } from '@/types';
 
 /* lets define a context to handle data globally */
-export const ThemeContext = createContext(null);
+export const ThemeContext = createContext<ContextObjType>(contextDataMock);
 
 export default function Home() {
   const [curiosity] = roversNames;
@@ -56,7 +56,7 @@ export default function Home() {
     getPhotosData();
   }, [roverName, pageNumber, cameraName, earthDate, solDate]);
 
-  const contextData: ContextObjType | any = {
+  const contextData: ContextObjType = {
     photosData: photosData,
     loadingState: loadingState,
     currentEarthDate: currentEarthDate,
@@ -76,7 +76,7 @@ export default function Home() {
 
   return (
     <Provider value={contextData}>
-      <main>
+      <main data-testid="main">
         <Box p={4}>
           <DarkModeSwitch />
           <TabsContent />

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders pagination buttons unchanged 1`] = `
+<div>
+  <div
+    class="chakra-stack css-15j388i"
+    data-testid="pagination-container"
+  />
+</div>
+`;

@@ -16,19 +16,19 @@ export type PhotoObjType = {
 };
 
 export type ContextObjType = {
-  photosData?: Array<object>;
-  loadingState?: boolean;
-  currentEarthDate?: string;
-  pageNumber?: number;
-  cameraName?: string;
-  earthDate?: string;
-  solDate?: number;
-  roverName?: string;
-  isQueryBySol?: boolean;
-  setPageNumber?: (arg0: number) => void;
-  setCameraName?: (arg0: string) => void;
-  setEarthDate?: (arg0: string) => void;
-  setSolDate?: (arg0: number) => void;
-  setRoverName?: (arg0: string) => void;
-  setIsQueryBySol?: (arg0: boolean) => void;
+  photosData: Array<object>;
+  loadingState: boolean;
+  currentEarthDate: string;
+  pageNumber: number;
+  cameraName: string;
+  earthDate: string;
+  solDate: number;
+  roverName: string;
+  isQueryBySol: boolean;
+  setPageNumber: (arg0: number) => void;
+  setCameraName: (arg0: string) => void;
+  setEarthDate: (arg0: string) => void;
+  setSolDate: (arg0: number) => void;
+  setRoverName: (arg0: string) => void;
+  setIsQueryBySol: (arg0: boolean) => void;
 };

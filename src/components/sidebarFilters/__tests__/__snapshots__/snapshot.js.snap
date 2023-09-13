@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders siderbar filters unchanged 1`] = `
+<div>
+  <div
+    class="css-0"
+    data-testid="sidebar-container"
+  />
+</div>
+`;

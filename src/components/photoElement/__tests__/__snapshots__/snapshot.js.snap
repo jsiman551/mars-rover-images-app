@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders pagination buttons unchanged 1`] = `
+<div>
+  <div
+    class="css-1wheore"
+    data-testid="photo-element-container"
+  >
+    <div
+      class="chakra-card css-2dlz7"
+    >
+      <div
+        class="chakra-card__body css-0"
+      >
+        <img
+          class="chakra-image css-0"
+          src=""
+        />
+        <div
+          class="chakra-stack css-29dqc6"
+        >
+          <h2
+            class="chakra-heading css-0"
+          >
+            Photo Description
+          </h2>
+          <ul
+            class="css-tu0njr"
+            role="list"
+          >
+            <li
+              class="css-0"
+            >
+              full test name (test name)
+            </li>
+            <li
+              class="css-0"
+            >
+              Earth Date: 2020-02-02
+            </li>
+            <li
+              class="css-0"
+            >
+              Sol Date: 1000
+            </li>
+          </ul>
+          <p
+            class="chakra-text css-1ppa63l"
+          >
+            Id: 500
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
