@@ -22,7 +22,7 @@ export type ContextObjType = {
   pageNumber: number;
   cameraName: string;
   earthDate: string;
-  solDate: number;
+  solDate: number | string;
   roverName: string;
   isQueryBySol: boolean;
   setPageNumber: (arg0: number) => void;

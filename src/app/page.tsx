@@ -26,7 +26,7 @@ export default function Home() {
   /* earth date number */
   const [earthDate, setEarthDate] = useState<string>(currentEarthDate);
   /* sol date number */
-  const [solDate, setSolDate] = useState<number>(1000);
+  const [solDate, setSolDate] = useState<number | string>(1000);
   const [roverName, setRoverName] = useState<string>(curiosity);
   /* flag to indicate which date is going to the call, either sol date or earth date */
   /* current earth date by default, to show latest photos for today */

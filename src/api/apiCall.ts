@@ -7,7 +7,7 @@ export const getPhotos = async (
   pageNumber: number = 1,
   cameraName: string,
   earthDate: string,
-  solDate: number,
+  solDate: number | string,
   isQueryBySol: boolean,
 ) => {
   /* either sol or earth date, both can't be in the same call */
