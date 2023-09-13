@@ -65,7 +65,7 @@ export default function SidebarFilters({ isOpen, onClose, btnRef }: Props) {
     }
     /* filter by sol date */
     if (solDateRef.current?.value) {
-      setSolDate(Number(solDateRef.current.value));
+      setSolDate(solDateRef.current.value);
     }
   };
 

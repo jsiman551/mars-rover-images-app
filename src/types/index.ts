@@ -28,7 +28,7 @@ export type ContextObjType = {
   setPageNumber: (arg0: number) => void;
   setCameraName: (arg0: string) => void;
   setEarthDate: (arg0: string) => void;
-  setSolDate: (arg0: number) => void;
+  setSolDate: (arg0: number | string) => void;
   setRoverName: (arg0: string) => void;
   setIsQueryBySol: (arg0: boolean) => void;
 };
