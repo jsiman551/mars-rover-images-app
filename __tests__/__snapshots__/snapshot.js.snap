@@ -6,15 +6,15 @@ exports[`renders homepage unchanged 1`] = `
     data-testid="main"
   >
     <div
-      class="css-2rlxtj"
+      class="css-h94677"
     >
       <div
-        class="chakra-form-control css-1yqeby0"
+        class="chakra-form-control css-19ipwzw"
         data-testid="switcher-control"
         role="group"
       >
         <label
-          class="chakra-form__label css-1w9kk21"
+          class="chakra-form__label css-16xaqf9"
           data-testid="switcher-label"
           for="dark-mode-switch"
           id="field-:r0:-label"
@@ -22,7 +22,7 @@ exports[`renders homepage unchanged 1`] = `
           Enable dark mode?
         </label>
         <label
-          class="chakra-switch css-16pgy8f"
+          class="chakra-switch css-dxtz5e"
           data-testid="switcher"
         >
           <input
@@ -36,33 +36,33 @@ exports[`renders homepage unchanged 1`] = `
           />
           <span
             aria-hidden="true"
-            class="chakra-switch__track css-14qxnv8"
+            class="chakra-switch__track css-p27qcy"
           >
             <span
-              class="chakra-switch__thumb css-0"
+              class="chakra-switch__thumb css-7roig"
             />
           </span>
         </label>
       </div>
       <h2
-        class="chakra-heading css-ft7kgn"
+        class="chakra-heading css-1vafmc6"
       >
         Mars Rover Photos
       </h2>
       <div
-        class="chakra-tabs css-0"
+        class="chakra-tabs css-13o7eu2"
         data-testid="tabs-container"
       >
         <div
           aria-orientation="horizontal"
-          class="chakra-tabs__tablist css-1ev1cfq"
+          class="chakra-tabs__tablist css-176hoj3"
           role="tablist"
         >
           <button
             aria-controls="tabs-:r2:--tabpanel-0"
             aria-disabled="false"
             aria-selected="true"
-            class="chakra-tabs__tab css-5wl5ud"
+            class="chakra-tabs__tab css-h5lhea"
             data-index="0"
             id="tabs-:r2:--tab-0"
             role="tab"
@@ -75,7 +75,7 @@ exports[`renders homepage unchanged 1`] = `
             aria-controls="tabs-:r2:--tabpanel-1"
             aria-disabled="false"
             aria-selected="false"
-            class="chakra-tabs__tab css-5wl5ud"
+            class="chakra-tabs__tab css-h5lhea"
             data-index="1"
             id="tabs-:r2:--tab-1"
             role="tab"
@@ -88,7 +88,7 @@ exports[`renders homepage unchanged 1`] = `
             aria-controls="tabs-:r2:--tabpanel-2"
             aria-disabled="false"
             aria-selected="false"
-            class="chakra-tabs__tab css-5wl5ud"
+            class="chakra-tabs__tab css-h5lhea"
             data-index="2"
             id="tabs-:r2:--tab-2"
             role="tab"
@@ -103,22 +103,22 @@ exports[`renders homepage unchanged 1`] = `
         >
           <div
             aria-labelledby="tabs-:r2:--tab-0"
-            class="chakra-tabs__tab-panel css-sjt5nk"
+            class="chakra-tabs__tab-panel css-a5mhaz"
             id="tabs-:r2:--tabpanel-0"
             role="tabpanel"
             tabindex="0"
           >
             <div
-              class="css-zb3t9w"
+              class="css-tk56ai"
             >
               <button
-                class="chakra-button css-4xx2wk"
+                class="chakra-button css-m4jvpz"
                 type="button"
               >
                 Open Filters
               </button>
               <h2
-                class="chakra-heading css-0"
+                class="chakra-heading css-1dklj6k"
               >
                 Page: 1
               </h2>
@@ -128,7 +128,7 @@ exports[`renders homepage unchanged 1`] = `
               data-testid="loading-container"
             >
               <div
-                class="chakra-spinner css-u4uvb9"
+                class="chakra-spinner css-4gics4"
                 data-testid="loading-spinner"
               >
                 <span
@@ -141,23 +141,23 @@ exports[`renders homepage unchanged 1`] = `
           </div>
           <div
             aria-labelledby="tabs-:r2:--tab-1"
-            class="chakra-tabs__tab-panel css-sjt5nk"
+            class="chakra-tabs__tab-panel css-a5mhaz"
             hidden=""
             id="tabs-:r2:--tabpanel-1"
             role="tabpanel"
             tabindex="0"
           >
             <div
-              class="css-zb3t9w"
+              class="css-tk56ai"
             >
               <button
-                class="chakra-button css-4xx2wk"
+                class="chakra-button css-m4jvpz"
                 type="button"
               >
                 Open Filters
               </button>
               <h2
-                class="chakra-heading css-0"
+                class="chakra-heading css-1dklj6k"
               >
                 Page: 1
               </h2>
@@ -167,7 +167,7 @@ exports[`renders homepage unchanged 1`] = `
               data-testid="loading-container"
             >
               <div
-                class="chakra-spinner css-u4uvb9"
+                class="chakra-spinner css-4gics4"
                 data-testid="loading-spinner"
               >
                 <span
@@ -180,23 +180,23 @@ exports[`renders homepage unchanged 1`] = `
           </div>
           <div
             aria-labelledby="tabs-:r2:--tab-2"
-            class="chakra-tabs__tab-panel css-sjt5nk"
+            class="chakra-tabs__tab-panel css-a5mhaz"
             hidden=""
             id="tabs-:r2:--tabpanel-2"
             role="tabpanel"
             tabindex="0"
           >
             <div
-              class="css-zb3t9w"
+              class="css-tk56ai"
             >
               <button
-                class="chakra-button css-4xx2wk"
+                class="chakra-button css-m4jvpz"
                 type="button"
               >
                 Open Filters
               </button>
               <h2
-                class="chakra-heading css-0"
+                class="chakra-heading css-1dklj6k"
               >
                 Page: 1
               </h2>
@@ -206,7 +206,7 @@ exports[`renders homepage unchanged 1`] = `
               data-testid="loading-container"
             >
               <div
-                class="chakra-spinner css-u4uvb9"
+                class="chakra-spinner css-4gics4"
                 data-testid="loading-spinner"
               >
                 <span
@@ -225,5 +225,9 @@ exports[`renders homepage unchanged 1`] = `
       />
     </div>
   </main>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
 </div>
 `;

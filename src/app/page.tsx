@@ -1,5 +1,7 @@
 'use client'
 import { useState, useEffect, createContext } from 'react'
+import { CacheProvider } from '@chakra-ui/next-js'
+import { ChakraProvider } from '@chakra-ui/react'
 // import moment from 'moment'
 import { getPhotos } from '@/api/apiCall'
 import DarkModeSwitch from '@/components/darkModeSwitch'
@@ -76,12 +78,16 @@ export default function Home() {
 
   return (
     <Provider value={contextData}>
-      <main data-testid="main">
-        <Box p={4}>
-          <DarkModeSwitch />
-          <TabsContent />
-        </Box>
-      </main>
+      <CacheProvider>
+        <ChakraProvider>
+          <main data-testid="main">
+            <Box p={4}>
+              <DarkModeSwitch />
+              <TabsContent />
+            </Box>
+          </main>
+        </ChakraProvider>
+      </CacheProvider>
     </Provider>
   )
 }
