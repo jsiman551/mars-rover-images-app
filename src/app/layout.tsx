@@ -1,20 +1,20 @@
-'use client';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider } from '@chakra-ui/react';
+'use client'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { CacheProvider } from '@chakra-ui/next-js'
+import { ChakraProvider } from '@chakra-ui/react'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'React Test Southerncode',
+  title: 'Mars Rover Photos',
   description: 'Connects to the NASA API (NASA Open APIs)',
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -24,5 +24,5 @@ export default function RootLayout({
         </CacheProvider>
       </body>
     </html>
-  );
+  )
 }

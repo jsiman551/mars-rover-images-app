@@ -1,5 +1,5 @@
-'use client';
-import { ReactNode, useRef, Fragment, useContext } from 'react';
+'use client'
+import { ReactNode, useRef, Fragment, useContext } from 'react'
 import {
   Tabs,
   TabList,
@@ -12,23 +12,23 @@ import {
   useDisclosure,
   Flex,
   Text,
-} from '@chakra-ui/react';
-import { roversNames } from '@/contants';
-import Loading from '../loading';
-import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import PaginationButtons from '../paginationButtons';
-import SidebarFilters from '../sidebarFilters';
-import { ContextObjType, PhotoObjType } from '@/types';
-import PhotoElement from '../photoElement';
-import { ThemeContext } from '@/app/page';
+} from '@chakra-ui/react'
+import { roversNames } from '@/contants'
+import Loading from '../loading'
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
+import PaginationButtons from '../paginationButtons'
+import SidebarFilters from '../sidebarFilters'
+import { ContextObjType, PhotoObjType } from '@/types'
+import PhotoElement from '../photoElement'
+import { ThemeContext } from '@/app/page'
 
 export default function TabsContent() {
   /* get context */
-  const context = useContext<ContextObjType>(ThemeContext);
+  const context = useContext<ContextObjType>(ThemeContext)
   const {
     photosData,
     loadingState,
-    currentEarthDate,
+    // currentEarthDate,
     pageNumber,
     setPageNumber,
     setCameraName,
@@ -36,30 +36,30 @@ export default function TabsContent() {
     setSolDate,
     setRoverName,
     setIsQueryBySol,
-  } = context;
+  } = context
   /* filter action */
-  const openFiltersRef = useRef<HTMLButtonElement>(null);
+  const openFiltersRef = useRef<HTMLButtonElement>(null)
   /* sidebar filters  states */
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   /* handle tabs change */
   const handleTabsChange = (index: number): void => {
     /* set numberPage to 1 each time the user changes tab */
-    setPageNumber(1);
+    setPageNumber(1)
     roversNames.forEach((name: string, i: number) => {
       if (index === i) {
-        setRoverName(name);
+        setRoverName(name)
       }
-    });
+    })
     /* set cameraName back to empty string */
-    setCameraName('');
+    setCameraName('')
     /* set earth date back to current date */
-    setEarthDate(currentEarthDate);
+    setEarthDate(/* currentEarthDate */ '2015-6-3')
     /* set sol date back to 1000 */
-    setSolDate(1000);
+    setSolDate(1000)
     /* set flag to switch dates back to earth date */
-    setIsQueryBySol(false);
-  };
+    setIsQueryBySol(false)
+  }
 
   return (
     <>
@@ -74,7 +74,7 @@ export default function TabsContent() {
       >
         <TabList mb="1em">
           {roversNames.map((name: string, i: number): ReactNode => {
-            return <Tab key={i}>{capitalizeFirstLetter(name)}</Tab>;
+            return <Tab key={i}>{capitalizeFirstLetter(name)}</Tab>
           })}
         </TabList>
         <TabPanels>
@@ -125,7 +125,7 @@ export default function TabsContent() {
                                   photoData={photo}
                                 />
                               </Fragment>
-                            );
+                            )
                           },
                         )}
                       </Grid>
@@ -139,7 +139,7 @@ export default function TabsContent() {
                   </>
                 )}
               </TabPanel>
-            );
+            )
           })}
         </TabPanels>
       </Tabs>
@@ -149,5 +149,5 @@ export default function TabsContent() {
         btnRef={openFiltersRef}
       />
     </>
-  );
+  )
 }

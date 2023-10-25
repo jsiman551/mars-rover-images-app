@@ -1,15 +1,11 @@
 /* DEMO KEY */
-export const apiKey: string = 'vljSVBigYSHnn0rsIvQ34hnNnDOf3TOzxWKycAtB';
+export const apiKey: string = 'vljSVBigYSHnn0rsIvQ34hnNnDOf3TOzxWKycAtB'
 
 /* Base API URL */
-export const baseApiUrl: string = 'https://api.nasa.gov/mars-photos/api/v1/';
+export const baseApiUrl: string = 'https://api.nasa.gov/mars-photos/api/v1/'
 
 /* Rovers Names */
-export const roversNames: Array<string> = [
-  'curiosity',
-  'opportunity',
-  'spirit',
-];
+export const roversNames: Array<string> = ['curiosity', 'opportunity', 'spirit']
 
 /* cameras list for curiosity rover */
 export const curiosityCameras: Array<string> = [
@@ -20,7 +16,7 @@ export const curiosityCameras: Array<string> = [
   'MAHLI',
   'MARDI',
   'NAVCAM',
-];
+]
 
 /* cameras list for opportunity rover */
 export const opportunityCameras: Array<string> = [
@@ -29,7 +25,7 @@ export const opportunityCameras: Array<string> = [
   'NAVCAM',
   'PANCAM',
   'MINITES',
-];
+]
 
 /* cameras list for spirit rover */
 export const spiritCameras: Array<string> = [
@@ -38,7 +34,7 @@ export const spiritCameras: Array<string> = [
   'NAVCAM',
   'PANCAM',
   'MINITES',
-];
+]
 
 /* test context mock */
 export const contextDataMock = {
@@ -97,7 +93,7 @@ export const contextDataMock = {
     },
   ],
   loadingState: false,
-  currentEarthDate: '2020-02-02',
+  // currentEarthDate: '2020-02-02',
   pageNumber: 1,
   cameraName: 'test camera',
   earthDate: '2020-02-02',
@@ -110,4 +106,4 @@ export const contextDataMock = {
   setSolDate: () => {},
   setRoverName: () => {},
   setIsQueryBySol: () => {},
-};
+}

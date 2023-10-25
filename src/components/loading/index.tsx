@@ -1,5 +1,5 @@
-'use client';
-import { Spinner, Box } from '@chakra-ui/react';
+'use client'
+import { Spinner, Box } from '@chakra-ui/react'
 
 export default function Loading() {
   return (
@@ -13,5 +13,5 @@ export default function Loading() {
         data-testid="loading-spinner"
       />
     </Box>
-  );
+  )
 }

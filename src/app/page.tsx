@@ -1,44 +1,44 @@
-'use client';
-import { useState, useEffect, createContext } from 'react';
-import moment from 'moment';
-import { getPhotos } from '@/api/apiCall';
-import DarkModeSwitch from '@/components/darkModeSwitch';
-import TabsContent from '@/components/tabsContent';
-import { Box } from '@chakra-ui/react';
-import { contextDataMock, roversNames } from '@/contants';
-import { ContextObjType } from '@/types';
+'use client'
+import { useState, useEffect, createContext } from 'react'
+// import moment from 'moment'
+import { getPhotos } from '@/api/apiCall'
+import DarkModeSwitch from '@/components/darkModeSwitch'
+import TabsContent from '@/components/tabsContent'
+import { Box } from '@chakra-ui/react'
+import { contextDataMock, roversNames } from '@/contants'
+import { ContextObjType } from '@/types'
 
 /* lets define a context to handle data globally */
-export const ThemeContext = createContext<ContextObjType>(contextDataMock);
+export const ThemeContext = createContext<ContextObjType>(contextDataMock)
 
 export default function Home() {
-  const [curiosity] = roversNames;
+  const [curiosity] = roversNames
   /* current earth date */
-  const currentEarthDate = moment(new Date()).format('yyyy-MM-DD');
+  // const currentEarthDate = moment(new Date()).format('yyyy-MM-DD')
   /* loading state, data won't render until is fully fetched */
-  const [loadingState, setLoadingState] = useState<boolean>(true);
+  const [loadingState, setLoadingState] = useState<boolean>(true)
   /* all photos data */
-  const [photosData, setPhotosData] = useState<Array<object>>([]);
+  const [photosData, setPhotosData] = useState<Array<object>>([])
   /* pagination number */
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<number>(1)
   /* camera name */
-  const [cameraName, setCameraName] = useState<string>('');
+  const [cameraName, setCameraName] = useState<string>('')
   /* earth date number */
-  const [earthDate, setEarthDate] = useState<string>(currentEarthDate);
+  const [earthDate, setEarthDate] = useState<string>('2015-6-3')
   /* sol date number */
-  const [solDate, setSolDate] = useState<number | string>(1000);
-  const [roverName, setRoverName] = useState<string>(curiosity);
+  const [solDate, setSolDate] = useState<number | string>(1000)
+  const [roverName, setRoverName] = useState<string>(curiosity)
   /* flag to indicate which date is going to the call, either sol date or earth date */
   /* current earth date by default, to show latest photos for today */
-  const [isQueryBySol, setIsQueryBySol] = useState<boolean>(false);
+  const [isQueryBySol, setIsQueryBySol] = useState<boolean>(false)
   /* context provider */
-  const { Provider } = ThemeContext;
+  const { Provider } = ThemeContext
 
   /* call rover photos */
   useEffect(() => {
     const getPhotosData = async () => {
       /* set loading state to true for new calls */
-      setLoadingState(true);
+      setLoadingState(true)
       const apiResponde = await getPhotos(
         roverName,
         pageNumber,
@@ -46,20 +46,20 @@ export default function Home() {
         earthDate,
         solDate,
         isQueryBySol,
-      );
+      )
       if (apiResponde) {
-        setPhotosData(apiResponde);
+        setPhotosData(apiResponde)
         /* set loading state to false, so photos can be rendered */
-        setLoadingState(false);
+        setLoadingState(false)
       }
-    };
-    getPhotosData();
-  }, [roverName, pageNumber, cameraName, earthDate, solDate]);
+    }
+    getPhotosData()
+  }, [roverName, pageNumber, cameraName, earthDate, solDate])
 
   const contextData: ContextObjType = {
     photosData: photosData,
     loadingState: loadingState,
-    currentEarthDate: currentEarthDate,
+    // currentEarthDate: currentEarthDate,
     pageNumber: pageNumber,
     cameraName: cameraName,
     earthDate: earthDate,
@@ -72,7 +72,7 @@ export default function Home() {
     setSolDate: setSolDate,
     setRoverName: setRoverName,
     setIsQueryBySol: setIsQueryBySol,
-  };
+  }
 
   return (
     <Provider value={contextData}>
@@ -83,5 +83,5 @@ export default function Home() {
         </Box>
       </main>
     </Provider>
-  );
+  )
 }

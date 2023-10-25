@@ -1,5 +1,5 @@
-import { contextDataMock } from '@/contants';
-import { PhotoObjType } from '@/types';
+import { contextDataMock } from '@/contants'
+import { PhotoObjType } from '@/types'
 import {
   GridItem,
   Card,
@@ -10,20 +10,20 @@ import {
   ListItem,
   Image,
   Text,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
 interface Props {
-  photoData: PhotoObjType;
-  roverName: string;
+  photoData: PhotoObjType
+  roverName: string
 }
 
-const { photosData } = contextDataMock;
+const { photosData } = contextDataMock
 
 export default function PhotoElement({
   photoData = photosData[0],
   roverName,
 }: Props) {
-  const { img_src, camera, earth_date, sol, id } = photoData;
+  const { img_src, camera, earth_date, sol, id } = photoData
   return (
     <GridItem
       borderRadius={'lg'}
@@ -48,5 +48,5 @@ export default function PhotoElement({
         </CardBody>
       </Card>
     </GridItem>
-  );
+  )
 }

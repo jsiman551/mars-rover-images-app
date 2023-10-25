@@ -1,8 +1,8 @@
-'use client';
-import { FormControl, FormLabel, Switch, useColorMode } from '@chakra-ui/react';
+'use client'
+import { FormControl, FormLabel, Switch, useColorMode } from '@chakra-ui/react'
 
 export default function DarkModeSwitch() {
-  const { toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode()
   return (
     <FormControl
       data-testid="switcher-control"
@@ -20,5 +20,5 @@ export default function DarkModeSwitch() {
         data-testid="switcher"
       />
     </FormControl>
-  );
+  )
 }
