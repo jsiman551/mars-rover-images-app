@@ -1,4 +1,3 @@
-import { contextDataMock } from '@/contants'
 import { PhotoObjType } from '@/types'
 import {
   GridItem,
@@ -17,12 +16,7 @@ interface Props {
   roverName: string
 }
 
-const { photosData } = contextDataMock
-
-export default function PhotoElement({
-  photoData = photosData[0],
-  roverName,
-}: Props) {
+export default function PhotoElement({ photoData, roverName }: Props) {
   const { img_src, camera, earth_date, sol, id } = photoData
   return (
     <GridItem

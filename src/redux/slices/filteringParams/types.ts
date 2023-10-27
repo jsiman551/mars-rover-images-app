@@ -1,0 +1,5 @@
+export const SET_CAMERA_NAME = 'filteringParams/setCameraName'
+export const SET_EARTH_DATE = 'filteringParams/setEarthDate'
+export const SET_SOL_DATE = 'filteringParams/setSolDate'
+export const SET_ROVER_NAME = 'filteringParams/setRoverName'
+export const SET_IS_QUERY_BY_SOL = 'filteringParams/setIsQueryBySol'

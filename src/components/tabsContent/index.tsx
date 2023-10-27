@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode, useRef, Fragment, useContext } from 'react'
+import { ReactNode, useRef, Fragment, useEffect } from 'react'
 import {
   Tabs,
   TabList,
@@ -18,25 +18,32 @@ import Loading from '../loading'
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter'
 import PaginationButtons from '../paginationButtons'
 import SidebarFilters from '../sidebarFilters'
-import { ContextObjType, PhotoObjType } from '@/types'
+import { PhotoObjType } from '@/types'
 import PhotoElement from '../photoElement'
-import { ThemeContext } from '@/app/page'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { fetchDataThunk } from '@/redux/slices/photosData/api'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { SET_PAGE_NUMBER } from '@/redux/slices/photosData/types'
+import {
+  SET_CAMERA_NAME,
+  SET_EARTH_DATE,
+  SET_IS_QUERY_BY_SOL,
+  SET_ROVER_NAME,
+  SET_SOL_DATE,
+} from '@/redux/slices/filteringParams/types'
 
 export default function TabsContent() {
-  /* get context */
-  const context = useContext<ContextObjType>(ThemeContext)
-  const {
-    photosData,
-    loadingState,
-    // currentEarthDate,
-    pageNumber,
-    setPageNumber,
-    setCameraName,
-    setEarthDate,
-    setSolDate,
-    setRoverName,
-    setIsQueryBySol,
-  } = context
+  const dispatch = useAppDispatch()
+  const photosData = useAppSelector((state) => state.photosData.value)
+  const loadingState = useAppSelector((state) => state.photosData.loading)
+  const pageNumber = useAppSelector((state) => state.photosData.pageNumber)
+  const cameraName = useAppSelector((state) => state.filteringParams.cameraName)
+  const roverName = useAppSelector((state) => state.filteringParams.roverName)
+  const isQueryBySol = useAppSelector(
+    (state) => state.filteringParams.isQueryBySol,
+  )
+  const earthDate = useAppSelector((state) => state.filteringParams.earthDate)
+  const solDate = useAppSelector((state) => state.filteringParams.solDate)
   /* filter action */
   const openFiltersRef = useRef<HTMLButtonElement>(null)
   /* sidebar filters  states */
@@ -45,21 +52,55 @@ export default function TabsContent() {
   /* handle tabs change */
   const handleTabsChange = (index: number): void => {
     /* set numberPage to 1 each time the user changes tab */
-    setPageNumber(1)
+    dispatch({
+      type: SET_PAGE_NUMBER,
+      payload: 1,
+    })
     roversNames.forEach((name: string, i: number) => {
       if (index === i) {
-        setRoverName(name)
+        dispatch({
+          type: SET_ROVER_NAME,
+          payload: name,
+        })
       }
     })
     /* set cameraName back to empty string */
-    setCameraName('')
+    dispatch({
+      type: SET_CAMERA_NAME,
+      payload: '',
+    })
     /* set earth date back to current date */
-    setEarthDate(/* currentEarthDate */ '2015-6-3')
+    dispatch({
+      type: SET_EARTH_DATE,
+      payload: '2015-6-3',
+    })
     /* set sol date back to 1000 */
-    setSolDate(1000)
+    dispatch({
+      type: SET_SOL_DATE,
+      payload: 1000,
+    })
     /* set flag to switch dates back to earth date */
-    setIsQueryBySol(false)
+    dispatch({
+      type: SET_IS_QUERY_BY_SOL,
+      payload: false,
+    })
   }
+
+  useEffect(() => {
+    const getPhotosData = () => {
+      dispatch(
+        fetchDataThunk({
+          roverName,
+          pageNumber,
+          cameraName,
+          earthDate,
+          solDate,
+          isQueryBySol,
+        }),
+      )
+    }
+    getPhotosData()
+  }, [roverName, pageNumber, cameraName, earthDate, solDate])
 
   return (
     <>

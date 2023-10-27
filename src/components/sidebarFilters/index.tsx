@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect, useRef, useState } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import {
   Button,
   Drawer,
@@ -22,8 +22,15 @@ import {
   spiritCameras,
   roversNames,
 } from '@/contants'
-import { ContextObjType } from '@/types'
-import { ThemeContext } from '@/app/page'
+import { SET_PAGE_NUMBER } from '@/redux/slices/photosData/types'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import {
+  SET_CAMERA_NAME,
+  SET_EARTH_DATE,
+  SET_IS_QUERY_BY_SOL,
+  SET_SOL_DATE,
+} from '@/redux/slices/filteringParams/types'
 
 interface Props {
   isOpen: boolean
@@ -32,21 +39,14 @@ interface Props {
 }
 
 export default function SidebarFilters({ isOpen, onClose, btnRef }: Props) {
-  /* get context */
-  const context = useContext<ContextObjType>(ThemeContext)
-  const {
-    // currentEarthDate,
-    cameraName,
-    setCameraName,
-    earthDate,
-    solDate,
-    roverName,
-    isQueryBySol,
-    setEarthDate,
-    setSolDate,
-    setIsQueryBySol,
-    setPageNumber,
-  } = context
+  const dispatch = useAppDispatch()
+  const cameraName = useAppSelector((state) => state.filteringParams.cameraName)
+  const roverName = useAppSelector((state) => state.filteringParams.roverName)
+  const isQueryBySol = useAppSelector(
+    (state) => state.filteringParams.isQueryBySol,
+  )
+  const earthDate = useAppSelector((state) => state.filteringParams.earthDate)
+  const solDate = useAppSelector((state) => state.filteringParams.solDate)
   const [curiosity, opportunity, spirit] = roversNames
   const cameraSelectorRef = useRef<HTMLSelectElement>(null)
   const earthDateRef = useRef<HTMLInputElement>(null)
@@ -57,30 +57,54 @@ export default function SidebarFilters({ isOpen, onClose, btnRef }: Props) {
   const applyFilters = (): void => {
     /* filter by camera */
     if (cameraSelectorRef.current?.value) {
-      setCameraName(cameraSelectorRef.current.value)
+      dispatch({
+        type: SET_CAMERA_NAME,
+        payload: cameraSelectorRef.current.value,
+      })
     }
     /* filter by earth date */
     if (earthDateRef.current?.value) {
-      setEarthDate(earthDateRef.current.value)
+      dispatch({
+        type: SET_EARTH_DATE,
+        payload: earthDateRef.current.value,
+      })
     }
     /* filter by sol date */
     if (solDateRef.current?.value) {
-      setSolDate(solDateRef.current.value)
+      dispatch({
+        type: SET_SOL_DATE,
+        payload: solDateRef.current.value,
+      })
     }
   }
 
   /* clear filters */
   const clearFilters = (): void => {
     /* camera name back to empty string */
-    setCameraName('')
+    dispatch({
+      type: SET_CAMERA_NAME,
+      payload: '',
+    })
     /* set earth date back to current date */
-    setEarthDate(/* currentEarthDate */ '2015-6-3')
+    dispatch({
+      type: SET_EARTH_DATE,
+      payload: '2015-6-3',
+    })
     /* set sol date back to 1000 */
-    setSolDate(1000)
+    dispatch({
+      type: SET_SOL_DATE,
+      payload: 1000,
+    })
     /* set flag to switch dates back to earth date */
-    setIsQueryBySol(false)
+    dispatch({
+      type: SET_IS_QUERY_BY_SOL,
+      payload: false,
+    })
     /* set page number back to 1 */
-    setPageNumber(1)
+    dispatch({
+      type: SET_PAGE_NUMBER,
+      payload: 1,
+    })
   }
 
   /* set the cameras list for selector */
@@ -113,7 +137,12 @@ export default function SidebarFilters({ isOpen, onClose, btnRef }: Props) {
               <FormLabel htmlFor="soldDateSwitch">Switch Dates?</FormLabel>
               <Switch
                 id="soldDateSwitch"
-                onChange={() => setIsQueryBySol(!isQueryBySol)}
+                onChange={() =>
+                  dispatch({
+                    type: SET_IS_QUERY_BY_SOL,
+                    payload: !isQueryBySol,
+                  })
+                }
               />
             </Box>
             <Divider my={4} />
