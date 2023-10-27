@@ -5,7 +5,10 @@ so it's posible to show the photos which are sent by the Rovers.
 
 ### Used Technology Description
 
-- TypeScript
-- Chakra UI (CSS Frameworks)
-- Next JS
-- Jest (for unit tests, written in js)
+- [ChakraUI](https://chakra-ui.com/)
+- [NextJs](https://nextjs.org/)
+- [Redux-Toolkit](https://redux-toolkit.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/) (JavaScript)
+
+Live Test URL: https://mars-rover-images-app.vercel.app/
