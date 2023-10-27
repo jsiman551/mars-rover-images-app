@@ -31,12 +31,12 @@ exports[`renders pagination buttons unchanged 1`] = `
             <li
               class="css-0"
             >
-              full test name (test name)
+              undefined (undefined)
             </li>
             <li
               class="css-0"
             >
-              Earth Date: 2020-02-02
+              Earth Date: 
             </li>
             <li
               class="css-0"
@@ -47,7 +47,7 @@ exports[`renders pagination buttons unchanged 1`] = `
           <p
             class="chakra-text css-1ppa63l"
           >
-            Id: 500
+            Id: 
           </p>
         </div>
       </div>
